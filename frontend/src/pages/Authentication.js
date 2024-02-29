@@ -34,6 +34,10 @@ export async function action({ request, params }) {
   if (!response.ok) {
     throw json({ message: "could not authenticate user" }, { status: 422 });
   }
+  const resData = await response.json();
+  const token = resData.token;
 
+  localStorage.setItem("token", token);
+  console.log(localStorage.getItem("token"));
   return redirect("/");
 }
